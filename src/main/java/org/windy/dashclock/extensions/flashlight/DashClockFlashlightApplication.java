@@ -9,11 +9,9 @@ import org.acra.annotation.ReportsCrashes;
 public class DashClockFlashlightApplication
     extends Application
 {
-
     @Override
     public void onCreate() {
         ACRA.init(this);
         super.onCreate();
     }
-
 }

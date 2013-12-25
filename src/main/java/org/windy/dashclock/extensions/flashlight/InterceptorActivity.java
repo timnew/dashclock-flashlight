@@ -11,9 +11,10 @@ public class InterceptorActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        setVisible(false);
+        finish();
 
-        moveTaskToBack(true);
+        super.onCreate(savedInstanceState);
 
         FlashlightExtension extension = FlashlightExtension.getInstance();
 
@@ -29,9 +30,5 @@ public class InterceptorActivity extends Activity {
         } else if (ACTION_TURN_OFF.equals(action)) {
             extension.turnLightOff();
         }
-
-        finish();
-
-        overridePendingTransition(0,0);
     }
 }

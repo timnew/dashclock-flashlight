@@ -80,11 +80,11 @@ public class FlashlightExtension extends DashClockExtension {
     protected void onUpdateData(int reason) {
         publishUpdate(new ExtensionData()
                 .visible(true)
-                .icon(R.drawable.ic_launcher)
-                .status(isLightOn() ? "Light On" : "Light Off")
+                .icon(isLightOn ? R.drawable.ic_light_bulb_on : R.drawable.ic_light_bulb_off)
+                .status("Light is " + (isLightOn ? "On" : "Off"))
+                .expandedTitle("Flash Light")
+                .expandedBody("Light is " + (isLightOn ? "On" : "Off"))
                 .clickIntent(new Intent(ACTION_TOGGLE, null, this, InterceptorActivity.class)));
     }
-
-    
 }
 
