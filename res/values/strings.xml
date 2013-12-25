@@ -1,0 +1,9 @@
+<resources>
+
+	<string name="app_name">Dash Clock Flashlight</string>
+    <string name="title">Flashlight</string>
+    <string name="description">Turn on/off flashlight in the extension</string>
+    <string name="no_camera">Camera doesn\'t exists on this device</string>
+    <string name="no_flash">No Flash Light found on the device</string>
+
+</resources>

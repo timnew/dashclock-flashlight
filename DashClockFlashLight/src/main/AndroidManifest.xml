@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <application>
+        <receiver android:name=".........src.main.java.org.windy.dashclock.extensions.flashlight.FlashlightBroadcastReciever"
+            android:exported="false"
+            android:enabled="true" >
+        </receiver>
+    </application>
+
+</manifest>
