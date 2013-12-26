@@ -17,7 +17,7 @@
         android:allowBackup="true">
 
         <service
-            android:name=".FlashlightExtension"
+            android:name="org.windy.dashclock.extensions.aqi.FlashlightExtension"
             android:icon="@drawable/ic_light_bulb_off"
             android:label="@string/title"
             android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
@@ -39,7 +39,7 @@
         </service>
 
         <activity
-            android:name=".InterceptorActivity"
+            android:name="org.windy.dashclock.extensions.aqi.InterceptorActivity"
             android:noHistory="true">
 
             <intent-filter>

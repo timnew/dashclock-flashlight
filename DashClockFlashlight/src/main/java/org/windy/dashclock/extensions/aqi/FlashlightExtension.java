@@ -1,4 +1,4 @@
-package org.windy.dashclock.extensions.flashlight;
+package org.windy.dashclock.extensions.aqi;
 
 import android.content.Intent;
 import android.hardware.Camera;

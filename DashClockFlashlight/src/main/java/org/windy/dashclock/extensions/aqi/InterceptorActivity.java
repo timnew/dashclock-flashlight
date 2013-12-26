@@ -1,11 +1,11 @@
-package org.windy.dashclock.extensions.flashlight;
+package org.windy.dashclock.extensions.aqi;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import static org.windy.dashclock.extensions.flashlight.FlashlightExtension.ACTION_TOGGLE;
-import static org.windy.dashclock.extensions.flashlight.FlashlightExtension.ACTION_TURN_OFF;
-import static org.windy.dashclock.extensions.flashlight.FlashlightExtension.ACTION_TURN_ON;
+import static org.windy.dashclock.extensions.aqi.FlashlightExtension.ACTION_TOGGLE;
+import static org.windy.dashclock.extensions.aqi.FlashlightExtension.ACTION_TURN_OFF;
+import static org.windy.dashclock.extensions.aqi.FlashlightExtension.ACTION_TURN_ON;
 
 public class InterceptorActivity extends Activity {
 
