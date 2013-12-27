@@ -1,11 +1,17 @@
 package org.windy.dashclock.extensions.aqi;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Camera;
+import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
+
+import org.windy.dashclock.extensions.flashlight.R;
 
 public class FlashlightExtension extends DashClockExtension {
 
@@ -15,15 +21,25 @@ public class FlashlightExtension extends DashClockExtension {
 
     private boolean isLightOn;
     private Camera camera;
+    private LocalBroadcastManager broadcastManager;
 
-    private static FlashlightExtension instance;
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    public static FlashlightExtension getInstance() {
-        return instance;
+        broadcastManager = LocalBroadcastManager.getInstance(getApplication());
+
+        broadcastManager.registerReceiver(new FlashlightControlIntentReceiver(this), buildIntentFilter());
     }
 
-    public FlashlightExtension() {
-        instance = this;
+    private IntentFilter buildIntentFilter() {
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction(ACTION_TURN_ON);
+        intentFilter.addAction(ACTION_TURN_OFF);
+        intentFilter.addAction(ACTION_TOGGLE);
+
+        return intentFilter;
     }
 
     public boolean isLightOn() {
@@ -85,6 +101,28 @@ public class FlashlightExtension extends DashClockExtension {
                 .expandedTitle("Flash Light")
                 .expandedBody("Light is " + (isLightOn ? "On" : "Off"))
                 .clickIntent(new Intent(ACTION_TOGGLE, null, this, InterceptorActivity.class)));
+    }
+
+    private static class FlashlightControlIntentReceiver extends BroadcastReceiver {
+
+        private final FlashlightExtension extension;
+
+        public FlashlightControlIntentReceiver(FlashlightExtension extension) {
+            this.extension = extension;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (ACTION_TOGGLE.equals(action)) {
+                extension.toggleLight();
+            } else if (ACTION_TURN_ON.equals(action)) {
+                extension.turnLightOn();
+            } else if (ACTION_TURN_OFF.equals(action)) {
+                extension.turnLightOff();
+            }
+        }
     }
 }
 

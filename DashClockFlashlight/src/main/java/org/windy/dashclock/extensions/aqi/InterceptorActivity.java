@@ -1,7 +1,9 @@
 package org.windy.dashclock.extensions.aqi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 
 import static org.windy.dashclock.extensions.aqi.FlashlightExtension.ACTION_TOGGLE;
 import static org.windy.dashclock.extensions.aqi.FlashlightExtension.ACTION_TURN_OFF;
@@ -16,19 +18,10 @@ public class InterceptorActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        FlashlightExtension extension = FlashlightExtension.getInstance();
+        Intent intent = getIntent();
 
-        if (extension == null)
-            return;
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
 
-        String action = getIntent().getAction();
-
-        if (ACTION_TOGGLE.equals(action)) {
-            extension.toggleLight();
-        } else if (ACTION_TURN_ON.equals(action)) {
-            extension.turnLightOn();
-        } else if (ACTION_TURN_OFF.equals(action)) {
-            extension.turnLightOff();
-        }
+        broadcastManager.sendBroadcast(new Intent(intent.getAction()));
     }
 }
