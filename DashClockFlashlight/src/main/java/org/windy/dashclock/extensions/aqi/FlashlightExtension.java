@@ -121,11 +121,23 @@ public class FlashlightExtension extends DashClockExtension {
     protected void onUpdateData(int reason) {
         publishUpdate(new ExtensionData()
                 .visible(true)
-                .icon(isLightOn ? R.drawable.ic_light_bulb_on : R.drawable.ic_light_bulb_off)
-                .status("Light is " + (isLightOn ? "On" : "Off"))
-                .expandedTitle("Flash Light")
-                .expandedBody("Light is " + (isLightOn ? "On" : "Off"))
+                .icon(getIcon())
+                .status(getStatus())
+                .expandedTitle(getApplicationContext().getString(R.string.title))
+                .expandedBody(getStatus())
                 .clickIntent(new Intent(ACTION_TOGGLE, null, this, InterceptorActivity.class)));
+    }
+
+    private String getStatus() {
+        return getApplicationContext().getString(R.string.status_template, getLightStatus());
+    }
+
+    private String getLightStatus() {
+        return getApplicationContext().getString(isLightOn ? R.string.light_on : R.string.light_off);
+    }
+
+    private int getIcon() {
+        return isLightOn ? R.drawable.ic_light_bulb_on : R.drawable.ic_light_bulb_off;
     }
 
     private static class FlashlightControlIntentReceiver extends BroadcastReceiver {
