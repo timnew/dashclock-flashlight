@@ -7,7 +7,5 @@ The difference is that Dash Clock - Flashlight insn't an indepnendant app but a 
 
 To use the plug-in, you need to add the plug in into the Dash Clock. To turn on/off the flashlight, just simply click the light bulb icon.
 
-TODO: SNAPSHOT REQUIRED HERE
-
-
-
+![image](doc/Screenshot-off.png)
+![image](doc/Screenshot-on.png)
