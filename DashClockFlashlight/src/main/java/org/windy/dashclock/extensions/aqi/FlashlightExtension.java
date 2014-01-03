@@ -65,7 +65,32 @@ public class FlashlightExtension extends DashClockExtension {
     }
 
     public void turnLightOn() {
-        camera = Camera.open();
+        try {
+            camera = Camera.open();
+        } catch (RuntimeException ex) { // Exception might be thrown when Camera service is unreachable.
+            /*
+            java.lang.RuntimeException: Fail to connect to camera service
+            at android.hardware.Camera.native_setup(Native Method)
+            at android.hardware.Camera.<init>(Camera.java:413)
+            at android.hardware.Camera.open(Camera.java:384)
+            at org.windy.dashclock.extensions.aqi.FlashlightExtension.turnLightOn(FlashlightExtension.java:68)
+            at org.windy.dashclock.extensions.aqi.FlashlightExtension.turnLight(FlashlightExtension.java:61)
+            at org.windy.dashclock.extensions.aqi.FlashlightExtension.toggleLight(FlashlightExtension.java:56)
+            at org.windy.dashclock.extensions.aqi.FlashlightExtension$FlashlightControlIntentReceiver.onReceive(FlashlightExtension.java:119)
+            at android.support.v4.content.LocalBroadcastManager.executePendingBroadcasts(LocalBroadcastManager.java:297)
+            at android.support.v4.content.LocalBroadcastManager.access$000(LocalBroadcastManager.java:46)
+            at android.support.v4.content.LocalBroadcastManager$1.handleMessage(LocalBroadcastManager.java:116)
+            at android.os.Handler.dispatchMessage(Handler.java:99)
+            at android.os.Looper.loop(Looper.java:137)
+            at android.app.ActivityThread.main(ActivityThread.java:5450)
+            at java.lang.reflect.Method.invokeNative(Native Method)
+            at java.lang.reflect.Method.invoke(Method.java:525)
+            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1187)
+            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+            at dalvik.system.NativeStart.main(Native Method)
+             */
+            ex.printStackTrace();
+        }
 
         if (camera == null) {
             Toast.makeText(this, R.string.no_camera, Toast.LENGTH_SHORT).show();
