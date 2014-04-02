@@ -119,13 +119,20 @@ public class FlashlightExtension extends DashClockExtension {
 
     @Override
     protected void onUpdateData(int reason) {
+
         publishUpdate(new ExtensionData()
                 .visible(true)
                 .icon(getIcon())
                 .status(getStatus())
                 .expandedTitle(getApplicationContext().getString(R.string.title))
                 .expandedBody(getStatus())
-                .clickIntent(new Intent(ACTION_TOGGLE, null, this, InterceptorActivity.class)));
+                .clickIntent(buildClickIntent()));
+    }
+
+    private Intent buildClickIntent() {
+        Intent clickIntent = new Intent(ACTION_TOGGLE, null, this, InterceptorActivity.class);
+        clickIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        return clickIntent;
     }
 
     private String getStatus() {
